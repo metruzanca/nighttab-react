@@ -1,9 +1,8 @@
+import { FileEvent, FileSelector } from "components/FileSelector"
 import { EditingContext } from "contexts"
 import { Persistance } from "lib"
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
-
-import devconfig from './devconfig.json'
 
 type Props = {}
 
@@ -37,17 +36,31 @@ const H1 = styled.div`
 
 export const Debug: React.FC<Props> = ({}) => {
   const {setEditing, editing} = useContext(EditingContext)
+  const [file, setFile] = useState<string|null>(null)
   const handleToggleEdit =  () => setEditing(!editing)
-  const handleInjectConfig = () => Persistance("localstorage").save(devconfig)
+  const handleInjectConfig = (file:string) => {
+    const json = JSON.parse(file)    
+    Persistance("localstorage").save(json)
+  }
+  function handleFileChanged(event:FileEvent) {
+    if(event.error){
+      // TODO handle error
+    }
+    event?.file && setFile(event.file)
+  }
+
   return (
     <Wrapper>
       <H1>Debug Tools</H1>
       <Button onClick={handleToggleEdit}>
         Toggle Edit Mode
       </Button>
-      <Button onClick={handleInjectConfig}>
-        Inject NightTab Dev Config
-      </Button>
+      <div>
+        <FileSelector onFileChanged={handleFileChanged}/>
+        <Button onClick={() => file && handleInjectConfig(file)}>
+          Inject Uploaded Config
+        </Button>
+      </div>
     </Wrapper>
   )
 }

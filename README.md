@@ -7,3 +7,15 @@ Idk how far this has gotten, I'm writing this readme the very first day I starte
 ---
 
 Hello future me!
+
+# Development
+
+```
+npm i
+```
+
+```
+npm start
+```
+
+While in development, theres a debug menu for toggling edit mode and for injecting a nighttab config
