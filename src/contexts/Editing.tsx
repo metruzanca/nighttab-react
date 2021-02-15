@@ -18,3 +18,16 @@ export const EditingProvider: React.FC = ({children}) => {
     </EditingContext.Provider>
   )
 }
+
+export interface Editable {
+  editing: boolean
+}
+
+export function withEditing<T extends object>(Component:React.FC<T>) {
+  const EditableComponent:React.FC<T & Editable> = (props) =>  (
+    <EditingContext.Consumer>
+      {({editing}) => <Component editing={editing} {...props as T}/>}
+    </EditingContext.Consumer>
+  )
+  return EditableComponent
+}

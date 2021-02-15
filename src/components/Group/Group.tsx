@@ -16,12 +16,13 @@ import {
   Edit,
   Delete,
 } from "./styles"
+import { withEditing, Editable } from "contexts";
 
-interface Props extends BookmarkGroup {
-  editing: boolean
-}
 
-export const Group: React.FC<Props> = ({
+// TODO how do I do this without declaring an interface like
+interface Props extends BookmarkGroup, Editable {}
+
+export const Group = withEditing<Props>(({
   items,
   name,
   openAll,
@@ -45,12 +46,12 @@ export const Group: React.FC<Props> = ({
       </Header>
       <Body>
         {items.map(itemProps => 
-          <>
+          <React.Fragment key={uuid()}>
             {console.log("item", itemProps)}
             <LinkItem editing={editing} key={uuid()} {...itemProps}/>
-          </>
+          </React.Fragment>
         )}
       </Body>
     </Wrapper>
   )
-}
+})
