@@ -17,9 +17,8 @@ import {
   Delete,
 } from "./styles"
 import { withEditing, Editable } from "contexts";
+import { Icons } from "styles";
 
-
-// TODO how do I do this without declaring an interface like
 interface Props extends BookmarkGroup, Editable {}
 
 export const Group = withEditing<Props>(({
@@ -32,13 +31,25 @@ export const Group = withEditing<Props>(({
   return (
     <Wrapper>
       <Header>
-        <Control>
-          <MoveUp/>
-          <Drag/>
-          <MoveDown/>
-          <Edit/>
-          <Delete/>
-        </Control>
+        {editing && (
+          <Control>
+            <MoveUp>
+              {Icons.UpArrow}
+            </MoveUp>
+            <Drag>
+              {Icons.Drag}
+            </Drag>
+            <MoveDown>
+              {Icons.DownArrow}
+            </MoveDown>
+            <Edit>
+              {Icons.Edit}
+            </Edit>
+            <Delete>
+              {Icons.Delete}
+            </Delete>
+          </Control>
+        )}
         {/* @zombiefox, this is a great example of where we can do things directly
             via react instead of using name.show to set a display: none
         */}
@@ -47,7 +58,6 @@ export const Group = withEditing<Props>(({
       <Body>
         {items.map(itemProps => 
           <React.Fragment key={uuid()}>
-            {console.log("item", itemProps)}
             <LinkItem editing={editing} key={uuid()} {...itemProps}/>
           </React.Fragment>
         )}
