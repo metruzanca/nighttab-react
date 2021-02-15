@@ -2,14 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from 'app';
-import { EditingProvider } from 'contexts';
+import { EditingProvider, ConfigProvider } from 'contexts';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <EditingProvider>
-      <App />
-    </EditingProvider>
+    <ConfigProvider>
+      <EditingProvider>
+        <App />
+      </EditingProvider>
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
