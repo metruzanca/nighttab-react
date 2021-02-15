@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
-import { Debug, Group, LinkItem } from 'components';
-import { EditingContext } from 'contexts';
+import { Debug, Group } from 'components';
+import { ConfigContext, EditingContext } from 'contexts';
 import { theme } from 'styles';
 
 const DefaultStyles = createGlobalStyle`
@@ -34,25 +35,17 @@ const DefaultStyles = createGlobalStyle`
 
 
 function App() {
-
   const {editing} = useContext(EditingContext)
-
+  const {config} = useContext(ConfigContext)
+  console.log(config.bookmarks);
+  
   return (
     <>
       <DefaultStyles/>
       {process.env.NODE_ENV === 'development' && <Debug/>}
-      <Group>
-        <LinkItem editing={editing}/>
-        <LinkItem editing={editing}/>
-        <LinkItem editing={editing}/>
-        <LinkItem editing={editing}/>
-      </Group>
-      <Group>
-        <LinkItem editing={editing}/>
-        <LinkItem editing={editing}/>
-        <LinkItem editing={editing}/>
-        <LinkItem editing={editing}/>
-      </Group>
+      {config.bookmarks.map(groupProps =>
+        <Group key={uuid()} {...groupProps} editing={editing}/>
+      )}
     </>
   );
 }

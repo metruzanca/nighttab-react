@@ -1,6 +1,6 @@
 import { HSL, RGB } from ".";
 
-export interface Bookmark {
+export interface BookmarkGroup {
   name: {
     text: string
     show: boolean

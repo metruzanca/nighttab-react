@@ -1,4 +1,9 @@
 import React from "react"
+import { v4 as uuid } from 'uuid';
+
+import {BookmarkGroup} from 'types'
+import { LinkItem } from "components"
+
 import {
   Body,
   Control,
@@ -12,9 +17,16 @@ import {
   Delete,
 } from "./styles"
 
-type Props = {}
+interface Props extends BookmarkGroup {
+  editing: boolean
+}
 
-export const Group: React.FC<Props> = ({children}) => {
+export const Group: React.FC<Props> = ({
+  items,
+  name,
+  openAll,
+  editing,
+}) => {
 
   return (
     <Wrapper>
@@ -26,10 +38,18 @@ export const Group: React.FC<Props> = ({children}) => {
           <Edit/>
           <Delete/>
         </Control>
-        <Name>Group Name Goes Here</Name>
+        {/* @zombiefox, this is a great example of where we can do things directly
+            via react instead of using name.show to set a display: none
+        */}
+        {name.show && <Name>{name.text}</Name>}
       </Header>
       <Body>
-        {children}
+        {items.map(itemProps => 
+          <>
+            {console.log("item", itemProps)}
+            <LinkItem editing={editing} key={uuid()} {...itemProps}/>
+          </>
+        )}
       </Body>
     </Wrapper>
   )
