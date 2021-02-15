@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 import { Debug, Group, LinkItem } from 'components';
-import { editingContext } from 'contexts';
+import { EditingContext } from 'contexts';
 import { theme } from 'styles';
 
 const DefaultStyles = createGlobalStyle`
@@ -35,7 +35,7 @@ const DefaultStyles = createGlobalStyle`
 
 function App() {
 
-  const {editing} = useContext(editingContext)
+  const {editing} = useContext(EditingContext)
 
   return (
     <>

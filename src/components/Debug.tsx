@@ -1,4 +1,4 @@
-import { editingContext } from "contexts"
+import { EditingContext } from "contexts"
 import React, { useContext } from "react"
 import styled from "styled-components"
 
@@ -30,7 +30,7 @@ const H1 = styled.div`
 `
 
 export const Debug: React.FC<Props> = ({}) => {
-  const {setEditing, editing} = useContext(editingContext)
+  const {setEditing, editing} = useContext(EditingContext)
   return (
     <Wrapper>
       <H1>Debug Tools</H1>

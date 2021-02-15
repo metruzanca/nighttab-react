@@ -5,7 +5,7 @@ interface EditingContextProps {
   setEditing: (editing:boolean) => void
 }
 
-export const editingContext = createContext<EditingContextProps>({
+export const EditingContext = createContext<EditingContextProps>({
   editing: false,
   setEditing: () => {}
 })
@@ -13,8 +13,8 @@ export const EditingProvider: React.FC = ({children}) => {
   const [editing, setEditing] = useState(false)
 
   return (
-    <editingContext.Provider value={{editing, setEditing}}>
+    <EditingContext.Provider value={{editing, setEditing}}>
       {children}
-    </editingContext.Provider>
+    </EditingContext.Provider>
   )
 }
