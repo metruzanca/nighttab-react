@@ -1,4 +1,5 @@
 import React from "react"
+import { Icons } from "styles"
 import {
   Back,
   Control,
@@ -35,11 +36,21 @@ export const LinkItem: React.FC<Props> = ({
           <p></p>
         </Url>
         <Control editing={editing}>
-          <MoveLeft></MoveLeft>
-          <Drag></Drag>
-          <MoveRight></MoveRight>
-          <Edit></Edit>
-          <Delete></Delete>
+          <MoveLeft>
+            {Icons.LeftArrow}
+          </MoveLeft>
+          <Drag>
+            {Icons.Drag}
+          </Drag>
+          <MoveRight>
+            {Icons.RightArrow}
+          </MoveRight>
+          <Edit>
+            {Icons.Edit}
+          </Edit>
+          <Delete>
+            {Icons.Delete}
+          </Delete>
         </Control>
       </Back>
     </Wrapper>
