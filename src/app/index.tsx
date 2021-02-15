@@ -44,7 +44,8 @@ function App() {
   return (
     <>
       <DefaultStyles/>
-      {process.env.NODE_ENV === 'development' && <Debug/>}
+      {/* {process.env.NODE_ENV === 'development' && <Debug/>} */}
+      <Debug/>
       <Background>
 
       </Background>
