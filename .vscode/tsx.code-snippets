@@ -1,0 +1,42 @@
+{
+	"Functional Component": {
+		"prefix": "rfc",
+		"body": [
+			"import React from \"react\"",
+			"",
+			"type Props = {}",
+			"",
+			"export const ${1:$TM_FILENAME_BASE}: React.FC<Props> = ({}) => {",
+			"",
+			"  return (",
+			"    <div>${1:$TM_FILENAME_BASE}</div>",
+			"  )",
+			"}"
+		],
+		"description": "Functional Component"
+	},
+	"React Context Provider": {
+		"prefix": "rcp",
+		"body": [
+			"import { createContext, useState } from \"react\";",
+			"",
+			"interface ${1:Context}Props {",
+			"",
+			"}",
+			"",
+			"export const ${1:Context} = createContext<${1:Context}Props>({",
+			"",
+			"})",
+			"export const ${1:Context}Provider: React.FC = ({children}) => {",
+			"  ",
+			"",
+			"  return (",
+			"    <${1:Context}.Provider value={{}}>",
+			"      {children}",
+			"    </${1:Context}.Provider>",
+			"  )",
+			"}"
+		],
+		"description": "React Context Provider"
+	},
+}
