@@ -1,7 +1,7 @@
 import { FileEvent, FileSelector } from "components/FileSelector"
 import { Modal } from "components/Modal"
 import { ModalPosition } from "components/Modal/styles"
-import { EditingContext, ShadeContext } from "contexts"
+import { EditingContext } from "contexts"
 import { Persistance } from "lib"
 import React, { useContext, useState } from "react"
 import styled from "styled-components"
@@ -67,9 +67,6 @@ export const Debug: React.FC<Props> = ({}) => {
   const {setEditing, editing} = useContext(EditingContext)
   const handleToggleEdit =  () => setEditing(!editing)
   
-  const {open, setOpen} = useContext(ShadeContext)
-  const handleToggleShade =  () => setOpen(!open)
-  
   const {Modal: Modal1, setOpen: setOpen1} = useModals(ModalPosition.left, "Nothing really")
   const {Modal: Modal2, setOpen: setOpen2} = useModals(ModalPosition.center, "Add bookmark/group")
   const {Modal: Modal3, setOpen: setOpen3} = useModals(ModalPosition.right, "Settings")
@@ -92,9 +89,6 @@ export const Debug: React.FC<Props> = ({}) => {
       <H1>Debug Tools</H1>
       <Button onClick={handleToggleEdit}>
         Toggle Edit Mode
-      </Button>
-      <Button onClick={handleToggleShade}>
-        Toggle Settings Menu
       </Button>
       <div style={{display: "flex", justifyContent:"space-around"}}>
       <Button onClick={setOpen1}>

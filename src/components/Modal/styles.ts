@@ -30,7 +30,6 @@ function modalPosition(position?: ModalPosition){
   having to add some really Jank styles to the parents.
 */
 export const Container = styled.div<ModalStyleProps>`
-  z-index: 11;
   position: fixed;
   top: 0;
   left: 0;
@@ -40,6 +39,10 @@ export const Container = styled.div<ModalStyleProps>`
   display: flex;
   ${p => modalPosition(p.position)}
   align-items: center;
+`
+
+export const Content = styled.section`
+  z-index: 11;
 `
 
 export const Shade = styled.div`

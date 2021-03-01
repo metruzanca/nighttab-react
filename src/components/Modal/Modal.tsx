@@ -1,6 +1,6 @@
 import { useOnClickOutside } from "hooks/useOnClickOutside"
 import React, { useRef } from "react"
-import { Shade, ModalStyleProps, Container } from "./styles"
+import { Shade, ModalStyleProps, Container, Content } from "./styles"
 
 
 
@@ -19,9 +19,9 @@ export const Modal: React.FC<Props> = ({
 
   return (
     <Container position={position}>
-      <section ref={menu}>
+      <Content ref={menu}>
         {children}
-      </section>
+      </Content>
       <Shade/>
     </Container>
   )

@@ -1,13 +1,14 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
 import { Debug, Group, Header, Menu } from 'components';
-import { ConfigContext, EditingContext, ShadeContext } from 'contexts';
+import { ConfigContext, EditingContext } from 'contexts';
 import { theme } from 'styles';
 
 import { Background, Layout, Link, LinkArea } from './styles';
 import { Modal } from 'components/Modal';
+import { ModalPosition } from 'components/Modal/styles';
 
 const DefaultStyles = createGlobalStyle`
   * {
@@ -40,10 +41,8 @@ const DefaultStyles = createGlobalStyle`
 function App() {
   const {editing} = useContext(EditingContext)
   const {config} = useContext(ConfigContext)
-  const {open, setOpen} = useContext(ShadeContext)
-  // useCallback might be slowing things down here... not sure. need to test down the road
-  const closeMenu = useCallback(() => setOpen(false), [setOpen])
-  console.log(config?.bookmarks);
+  const [open, setOpen] = useState(false)
+  console.log("Bookmarks", config?.bookmarks);
 
   return (
     <>
@@ -54,7 +53,7 @@ function App() {
 
       </Background>
       <Layout>
-        <Header  config={config.state.header}/>
+        <Header config={config.state.header}/>
         <Link>
           <LinkArea>
             {config && config.bookmarks.map(groupProps =>
@@ -69,7 +68,7 @@ function App() {
         Will probably require some extra transition setup, but thats okay.
       */}
       {open && (
-        <Modal closeMenu={closeMenu}>
+        <Modal closeMenu={() => setOpen(false)}>
           <Menu/>
         </Modal>
       )}
