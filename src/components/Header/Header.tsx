@@ -8,11 +8,23 @@ import { Debug } from "components/Debug"
 import { ModalPosition } from "components/Modal/styles"
 
 interface Props extends MenuProps {
-  config: HeaderType
+  // config: HeaderType
 }
 
+const TEMP_CONFIG = [
+  "greeting",
+  "transitional",
+  "clock",
+  "date",
+  "search",
+  "editAdd",
+  "colorAccent",
+  "menu"
+]
+
 export const Header: React.FC<Props> = ({
-  config: { order }, setOpen
+  // config: { order },
+  setOpen,
 }) => {
   const Debug = useDebug()
 
@@ -20,7 +32,7 @@ export const Header: React.FC<Props> = ({
   headerElements.set("editadd", <EditAdd/>)
   headerElements.set("menu", <Menu setOpen={setOpen}/>)
 
-  const elements = reorder(order, headerElements)
+  const elements = reorder(TEMP_CONFIG, headerElements)
 
   return (
     <Wrapper>
@@ -43,7 +55,7 @@ function reorder(order:string[], components:Map<string, React.ReactNode>){
 // Eventually this will moved elsewhere, maybe.
 function useDebug() {
   const [debug, setDebug] = useState(false)
-  if(process.env.NODE_ENV === 'development'){
+  if(process.env.NODE_ENV === 'development' || true){
     return (
       <>
         <button onClick={() => setDebug(true)}>Debug</button>

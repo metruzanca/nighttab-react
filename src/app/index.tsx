@@ -37,6 +37,7 @@ const DefaultStyles = createGlobalStyle`
   }
 `
 
+// TODO remove all the ? and config && once generating a new instance is setup
 
 function App() {
   const {editing} = useContext(EditingContext)
@@ -49,7 +50,10 @@ function App() {
       <DefaultStyles/>      
       <Background/>
       <Layout>
-        <Header config={config.state.header} setOpen={() => setOpen(true)}/>
+        <Header
+          // config={config.state.header}
+          setOpen={() => setOpen(true)}
+        />
         <Link>
           <LinkArea>
             {config && config.bookmarks.map(groupProps =>
