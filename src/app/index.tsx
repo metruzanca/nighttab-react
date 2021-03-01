@@ -46,14 +46,10 @@ function App() {
 
   return (
     <>
-      <DefaultStyles/>
-      {/* {process.env.NODE_ENV === 'development' && <Debug/>} */}
-      <Debug/>
-      <Background>
-
-      </Background>
+      <DefaultStyles/>      
+      <Background/>
       <Layout>
-        <Header config={config.state.header}/>
+        <Header config={config.state.header} setOpen={() => setOpen(true)}/>
         <Link>
           <LinkArea>
             {config && config.bookmarks.map(groupProps =>
@@ -68,7 +64,7 @@ function App() {
         Will probably require some extra transition setup, but thats okay.
       */}
       {open && (
-        <Modal closeMenu={() => setOpen(false)}>
+        <Modal closeMenu={() => setOpen(false)} position={ModalPosition.right}>
           <Menu/>
         </Modal>
       )}

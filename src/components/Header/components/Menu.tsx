@@ -1,10 +1,14 @@
 import React from "react"
 
-type Props = {}
+export type MenuProps = {
+  setOpen: () => void
+}
 
-export const Menu: React.FC<Props> = ({}) => {
+export const Menu: React.FC<MenuProps> = ({
+  setOpen
+}) => {
 
   return (
-    <div>Menu</div>
+    <button onClick={setOpen}>Menu</button>
   )
 }
