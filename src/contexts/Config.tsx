@@ -26,6 +26,7 @@ export const ConfigProvider: React.FC = ({children}) => {
   })
 
   if(!instance){
+    // TODO uncomment once new Instance() is working
     // instance.current = new Instance()
     // This path shouldn't even be necessary as load's job is to load
     // or create a new Instance if one is not found
@@ -33,7 +34,7 @@ export const ConfigProvider: React.FC = ({children}) => {
 
   return (
     <ConfigContext.Provider value={{
-      //@ts-ignore Remove this ignore once creating a new nighttab instance has been done
+      //@ts-ignore //TODO Remove this ignore once creating a new nighttab instance has been done
       config: instance.current,
       save: persist.save,
     }}>

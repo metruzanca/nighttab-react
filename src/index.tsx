@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from 'app';
-import { EditingProvider, ConfigProvider } from 'contexts';
+import { EditingProvider, ConfigProvider, ShadeProvider } from 'contexts';
+import { Compose } from 'lib/utils';
 
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -14,11 +15,13 @@ import { EditingProvider, ConfigProvider } from 'contexts';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ConfigProvider>
-      <EditingProvider>
-        <App />
-      </EditingProvider>
-    </ConfigProvider>
+    <Compose components={[
+      ConfigProvider,
+      EditingProvider,
+      ShadeProvider,
+    ]}>
+      <App />
+    </Compose>
   </React.StrictMode>,
   document.getElementById('root')
 );

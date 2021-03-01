@@ -15,7 +15,3 @@ export const Link = styled.section`
 export const LinkArea = styled.div`
 
 `
-
-export const Menu = styled.section`
-
-`

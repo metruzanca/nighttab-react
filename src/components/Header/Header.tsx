@@ -1,30 +1,31 @@
 import React from "react"
 import { Wrapper } from "./styles"
-import {
-  Clock,
-  Date,
-  EditAdd,
-  Greeting,
-  Menu,
-  ColorAccent,
-  SearchBar,
-  Transitional,
-} from './components'
 
-type Props = {}
+import { Header as HeaderType } from "types"
+import { headerElements } from "./components"
 
-export const Header: React.FC<Props> = ({}) => {
+interface Props {
+  config: HeaderType
+}
+
+export const Header: React.FC<Props> = ({
+  config: { order }
+}) => {
+
+  const elements = reorder(order, headerElements)
 
   return (
     <Wrapper>
-      <Greeting/>
-      <Transitional/>
-      <Clock/>
-      <Date/>
-      <SearchBar/>
-      <EditAdd/>
-      <ColorAccent/>
-      <Menu/>
+      {elements}
     </Wrapper>
   )
+}
+
+function reorder(order:string[], components:Map<string, React.ReactNode>){
+  const ordered:React.ReactNode[] = []
+  order.forEach(item => {
+    const comp = components.get(item)
+    ordered.push(comp)
+  })
+  return ordered
 }

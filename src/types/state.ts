@@ -1,9 +1,11 @@
 import { HSL, RGB } from "./color";
+import { Header } from "./header";
 
 export interface State {
-  edit: boolean
+  // I think we should drop edit and shade from the persistant state
+  // edit: boolean
+  // shade: boolean
   pagelock: boolean
-  shade: boolean
   edge: boolean
   search: boolean
   menu: boolean
@@ -19,151 +21,7 @@ export interface State {
   background: Background
 }
 
-interface Header {
-  area: {
-    width: number
-    justify: "center"
-    align: "center"
-  }
-  item: {
-    justify: "left"
-  }
-  greeting: {
-    show: boolean
-    type: "good"
-    name: string
-    size: number
-    newLine: boolean
-  }
-  clock: {
-    hours: {
-      show: boolean
-      display: "number"
-    }
-    minutes: {
-      show: boolean
-      display: "number"
-    }
-    seconds: {
-      show: boolean
-      display: "number"
-    }
-    separator: {
-      show: boolean
-      text: string
-    }
-    meridiem: {
-      show: boolean
-    }
-    hour24: {
-      show: boolean
-    }
-    size: number
-    newLine: boolean
-  }
-  transitional: {
-    show: boolean
-    type: "timeanddate"
-    size: number
-    newLine: boolean
-  }
-  // IDK in general
-  date: {
-    day: {
-      show: boolean
-      display: "word"
-      weekStart: "monday"
-      length: "long"
-    }
-    date: {
-      show: boolean
-      display: "number"
-      ordinal: boolean
-    }
-    month: {
-      show: boolean
-      display: "word"
-      length: "long"
-      ordinal: boolean
-    }
-    year: {
-      show: boolean
-      display: "number"
-    }
-    separator: {
-      show: boolean
-      text: string
-    }
-    format: "datemonth"
-    size: number
-    newLine: boolean
-  }
-  search: {
-    show: boolean
-    style: "box"
-    width: {
-      by: "auto"
-      size: number
-    }
-    focus: boolean
-    engine: SearchEngineDictionary
-    text: {
-      justify: "center"
-    }
-    size: number
-    opacity: number
-    newLine: boolean
-    newTab: boolean
-  }
-  editAdd: {
-    show: boolean
-    size:number
-    opacity:number
-    newLine: boolean
-  }
-  colorAccent: {
-    dot: {
-      show: boolean
-    }
-    show: boolean
-    size:number
-    opacity:number
-    newLine: boolean
-  }
-  menu: {
-    show: boolean
-    size: number
-    opacity: number
-    newLine: boolean
-  }
-  order: [
-    "greeting",
-    "transitional",
-    "clock",
-    "date",
-    "search",
-    "editAdd",
-    "colorAccent",
-    "menu",
-  ]
-  border: {
-    top: number
-    bottom: number
-  }
-  color: {
-    by: "theme"
-    hsl: HSL
-    rgb: RGB
-    // idk
-    style: "scroll"
-    opacity: number
-    show: boolean
-    newLine: boolean
-  }
-  // idk
-  position: "inline"
-  radius: boolean
-}
+
 
 interface Link {
   area: {
@@ -386,20 +244,5 @@ interface Background {
       start: number
       end: number
     }
-  }
-}
-
-
-type SearchEngineDictionary = Engine & Selected
-
-interface Selected {
-  selected: String
-}
-
-interface Engine {
-  [name:string]: {
-    url: string
-    name: string
-    queryName: string
   }
 }

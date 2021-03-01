@@ -4,3 +4,13 @@ export const theme = {
   linkItemHeight: "10em",
   rootFontSize: "16px",
 }
+
+// function createSheet(data){
+//   return Object.entries(data)
+//     .map(([k,v]) => `--${k}: ${v};\n`)
+//     .join("")
+// }
+
+// function cssVar(key: keyof typeof flat){
+//   return `var(--${key})`
+// }

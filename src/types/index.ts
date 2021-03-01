@@ -1,4 +1,5 @@
 export * from './bookmarks'
 export * from './color'
+export * from './header'
 export * from './instance'
 export * from './state'

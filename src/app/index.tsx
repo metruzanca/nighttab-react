@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
-import { Debug, Group } from 'components';
-import { ConfigContext, EditingContext } from 'contexts';
+import { Debug, Group, Header, Menu } from 'components';
+import { ConfigContext, EditingContext, ShadeContext } from 'contexts';
 import { theme } from 'styles';
-import { Background, Layout, Link, LinkArea, Menu } from './styles';
-import { Header } from 'components/Header';
+
+import { Background, Layout, Link, LinkArea } from './styles';
+import { Modal } from 'components/Modal';
 
 const DefaultStyles = createGlobalStyle`
   * {
@@ -39,8 +40,11 @@ const DefaultStyles = createGlobalStyle`
 function App() {
   const {editing} = useContext(EditingContext)
   const {config} = useContext(ConfigContext)
+  const {open, setOpen} = useContext(ShadeContext)
+  // useCallback might be slowing things down here... not sure. need to test down the road
+  const closeMenu = useCallback(() => setOpen(false), [setOpen])
   console.log(config?.bookmarks);
-  
+
   return (
     <>
       <DefaultStyles/>
@@ -50,9 +54,7 @@ function App() {
 
       </Background>
       <Layout>
-        <Header>
-
-        </Header>
+        <Header  config={config.state.header}/>
         <Link>
           <LinkArea>
             {config && config.bookmarks.map(groupProps =>
@@ -61,9 +63,16 @@ function App() {
           </LinkArea>
         </Link>
       </Layout>
-      <Menu>
-
-      </Menu>
+      {/*
+        @ZombieFox Original nighttab kept Menu off screen.
+        Conditionally rendering it will probably make NT load faster
+        Will probably require some extra transition setup, but thats okay.
+      */}
+      {open && (
+        <Modal closeMenu={closeMenu}>
+          <Menu/>
+        </Modal>
+      )}
     </>
   );
 }

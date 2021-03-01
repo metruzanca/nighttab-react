@@ -1,5 +1,7 @@
 import { FileEvent, FileSelector } from "components/FileSelector"
-import { EditingContext } from "contexts"
+import { Modal } from "components/Modal"
+import { ModalPosition } from "components/Modal/styles"
+import { EditingContext, ShadeContext } from "contexts"
 import { Persistance } from "lib"
 import React, { useContext, useState } from "react"
 import styled from "styled-components"
@@ -14,6 +16,7 @@ const Wrapper = styled.div`
   padding: .5em;
   display: flex;
   flex-direction: column;
+  z-index: 1000;
 `
 
 const Button = styled.button`
@@ -34,19 +37,54 @@ const H1 = styled.div`
   margin-bottom: .5em;
 `
 
+const DebugModal = styled.div`
+  height: 500px;
+  width: 500px;
+  background: lime;
+`
+
+// Don't export this. I made this to make this file less spaghetti
+function useModals(position: ModalPosition , text = "MODAL"){
+  const [open, setOpen] = useState(false)
+
+  return {
+    Modal: (
+      <>
+        {open && (
+          <Modal position={position} closeMenu={() => setOpen(false)}>
+            <DebugModal>
+              {text}
+            </DebugModal>
+          </Modal>
+        )}
+      </>
+    ),
+    setOpen: () => setOpen(true),
+  }
+}
+
 export const Debug: React.FC<Props> = ({}) => {
   const {setEditing, editing} = useContext(EditingContext)
-  const [file, setFile] = useState<string|null>(null)
   const handleToggleEdit =  () => setEditing(!editing)
-  const handleInjectConfig = (file:string) => {
-    const json = JSON.parse(file)    
-    Persistance("localstorage").save(json)
-  }
+  
+  const {open, setOpen} = useContext(ShadeContext)
+  const handleToggleShade =  () => setOpen(!open)
+  
+  const {Modal: Modal1, setOpen: setOpen1} = useModals(ModalPosition.left, "Nothing really")
+  const {Modal: Modal2, setOpen: setOpen2} = useModals(ModalPosition.center, "Add bookmark/group")
+  const {Modal: Modal3, setOpen: setOpen3} = useModals(ModalPosition.right, "Settings")
+
+  const [file, setFile] = useState<string|null>(null)
   function handleFileChanged(event:FileEvent) {
     if(event.error){
       // TODO handle error
     }
     event?.file && setFile(event.file)
+  }
+
+  const handleInjectConfig = (file:string) => {
+    const json = JSON.parse(file)    
+    Persistance("localstorage").save(json)
   }
 
   return (
@@ -55,12 +93,29 @@ export const Debug: React.FC<Props> = ({}) => {
       <Button onClick={handleToggleEdit}>
         Toggle Edit Mode
       </Button>
+      <Button onClick={handleToggleShade}>
+        Toggle Settings Menu
+      </Button>
+      <div style={{display: "flex", justifyContent:"space-around"}}>
+      <Button onClick={setOpen1}>
+        Modal Left
+      </Button>
+      <Button onClick={setOpen2}>
+        Modal Center
+      </Button>
+      <Button onClick={setOpen3}>
+        Modal Right
+      </Button>
+      </div>
       <div>
         <FileSelector onFileChanged={handleFileChanged}/>
         <Button onClick={() => file && handleInjectConfig(file)}>
           Inject Uploaded Config
         </Button>
       </div>
+      {Modal1}
+      {Modal2}
+      {Modal3}
     </Wrapper>
   )
 }
