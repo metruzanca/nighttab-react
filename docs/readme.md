@@ -4,15 +4,15 @@ Target readers of this doc are contributors and anyone wondering how NT works. T
 
 Table of Contents:
 
-- [Intro](docs/readme) (You are Here)
-- [Project Structure](docs/readme#project-structure)
-  - [Component Barreling](docs/readme#component-barreling)
-  - [Absolute Imports](docs/readme#absolute-imports)
-- [Tools Used](docs/readme#tools-used)
-  - [Linting](docs/readme#linting)
-  - [Boiletplates](docs/readme#boilerplates)
-  - [Recommended vscode extensions](docs/readme#recommended-vscode-extensions)
-- [Deployment (CI/CD)](docs/readme#deployment)
+- [Intro](readme.md) (You are Here)
+- [Project Structure](readme.md#project-structure)
+  - [Component Barreling](readme.md#component-barreling)
+  - [Absolute Imports](readme.md#absolute-imports)
+- [Tools Used](readme.md#tools-used)
+  - [Linting](readme.md#linting)
+  - [Boiletplates](readme.md#boilerplates)
+  - [Recommended vscode extensions](readme.md#recommended-vscode-extensions)
+- [Deployment (CI/CD)](readme.md#deployment)
 
 
 This project was bootstrapped with [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html).
