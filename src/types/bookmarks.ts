@@ -8,13 +8,13 @@ export interface BookmarkGroup {
   openAll: {
     show: boolean
   }
-  items: Item[]
+  items: BookmarkItem[]
 }
 
 // TODO reverse engineer original src to confirm assumptions
 // The src could also have "hidden" properties that simply aren't added by default
 
-interface Item {
+export interface BookmarkItem {
   url: string
   wide: boolean
   tall: boolean

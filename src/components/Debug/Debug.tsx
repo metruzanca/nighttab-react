@@ -1,3 +1,4 @@
+import { ColorPicker } from "components/ColorPicker"
 import { FileEvent, FileSelector } from "components/FileSelector"
 import { Modal } from "components/Modal"
 import { ModalPosition } from "components/Modal/styles"
@@ -44,7 +45,7 @@ const DebugModal = styled.div`
 `
 
 // Don't export this. I made this to make this file less spaghetti
-function useModals(position: ModalPosition , text = "MODAL"){
+function useModals(position: ModalPosition , children:any){
   const [open, setOpen] = useState(false)
 
   return {
@@ -53,7 +54,7 @@ function useModals(position: ModalPosition , text = "MODAL"){
         {open && (
           <Modal position={position} closeMenu={() => setOpen(false)}>
             <DebugModal>
-              {text}
+              {children}
             </DebugModal>
           </Modal>
         )}
@@ -67,9 +68,11 @@ export const Debug: React.FC<Props> = ({}) => {
   const {setEditing, editing} = useContext(EditingContext)
   const handleToggleEdit =  () => setEditing(!editing)
   
-  const {Modal: Modal1, setOpen: setOpen1} = useModals(ModalPosition.left, "Nothing really")
   const {Modal: Modal2, setOpen: setOpen2} = useModals(ModalPosition.center, "Add bookmark/group")
   const {Modal: Modal3, setOpen: setOpen3} = useModals(ModalPosition.right, "Settings")
+  const {Modal: Modal1, setOpen: setOpen1} = useModals(ModalPosition.left, (
+    <ColorPicker/>
+  ))
 
   const [file, setFile] = useState<string|null>(null)
   function handleFileChanged(event:FileEvent) {
@@ -92,7 +95,7 @@ export const Debug: React.FC<Props> = ({}) => {
       </Button>
       <div style={{display: "flex", justifyContent:"space-around"}}>
       <Button onClick={setOpen1}>
-        Modal Left
+        Modal Left with colorPicker
       </Button>
       <Button onClick={setOpen2}>
         Modal Center
