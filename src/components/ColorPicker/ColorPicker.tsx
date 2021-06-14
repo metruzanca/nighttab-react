@@ -6,7 +6,7 @@
  * In the future formWrap and friends will be moved to a permenant location & better organized
  * 
  */
-import { hsl2rgb, rgb2hsl } from "lib/state"
+import { hex2rgb, hsl2rgb, rgb2hex, rgb2hsl } from "lib/color"
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { HSL, RGB } from "types"
 import { v4 as uuid } from 'uuid'
@@ -25,14 +25,36 @@ type ColorPickerProps = {}
 
 type ChangeProps = React.ChangeEvent<HTMLInputElement>
 
-function _dec2PaddedHex(decimal:number){
-  return decimal.toString(16).padStart(2, "0")
+
+
+function useColor({initialRgb, initialHsl}: {initialRgb:RGB, initialHsl:HSL}) {
+  const [rgb, setRgb] = useState<RGB>(initialRgb)
+  const [hsl, setHsl] = useState<HSL>(initialHsl)
+
+  function updateRGB(newColor: Partial<RGB>){
+    setRgb(rgb => {
+      const newRgb = {...rgb, ...newColor}
+      setHsl(rgb2hsl(newRgb))
+      return newRgb
+    })
+  }
+
+  function updateHSL(newColor: Partial<HSL>) {
+    setHsl(hsl => {
+      const newHsl = {...hsl, ...newColor}
+      setRgb(hsl2rgb(newHsl))
+      return newHsl
+    })
+  }
+
+  return {
+    rgb,
+    hsl,
+    updateRGB,
+    updateHSL,
+  }
 }
 
-function rgb2hex({ r, g, b }:RGB, opacity:number = 0){
-  const hex = `#${_dec2PaddedHex(r)}${_dec2PaddedHex(b)}${(_dec2PaddedHex(g))}`
-  return opacity !== 0 ? hex + _dec2PaddedHex(opacity) : hex
-}
 
 export const ColorPicker: React.FC<ColorPickerProps> = ({}) => {
   const [color, setColor] = useState<RGB>({ r:0, g:0, b:0 })
@@ -47,10 +69,6 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({}) => {
   function updateHSL(newColor: Partial<HSL>) {
     setColor(hsl2rgb({...hsl, ...newColor}))
   }
-
-  useEffect(() => {
-    console.log(color);
-  }, [color])
 
   return (
     <FormWrap>
@@ -135,17 +153,6 @@ const ColorSlider: React.FC<Props> = ({
       </FormGroup>
     </FormWrap>
   )
-}
-
-function hex2rgb(hex:string): RGB{
-  const r = hex.substr(1, 2)
-  const g = hex.substr(3, 2)
-  const b = hex.substr(5, 2)  
-  return {
-    r: parseInt(r, 16),
-    g: parseInt(g, 16),
-    b: parseInt(b, 16),
-  }
 }
 
 type ColorInputProps = {
