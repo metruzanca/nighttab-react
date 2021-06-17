@@ -1,10 +1,9 @@
 import { HSL, RGB } from "./color";
 import { Header } from "./header";
 
-export interface State {
-  // I think we should drop edit and shade from the persistant state
+export interface Settings {
   // edit: boolean
-  // shade: boolean
+  shade: boolean
   pagelock: boolean
   edge: boolean
   search: boolean
@@ -95,7 +94,7 @@ interface Link {
   edit: boolean
   style: "block"
   orientation: "bottom"
-  breakpoint: "xl"
+  breakpoint: string
 }
 
 interface Group {

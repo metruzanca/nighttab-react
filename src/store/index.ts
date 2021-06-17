@@ -1,14 +1,12 @@
 import { createStore } from 'redux'
 import { devToolsEnhancer } from 'redux-devtools-extension';
-import { reducers } from "./ducks"
+import { rootReducer } from "./ducks"
 import registerCommands from './commands'
-
-// TODO Persistance loading as default state
-// might help https://redux.js.org/recipes/structuring-reducers/initializing-state
+import { Persistance } from 'lib';
 
 const store = createStore(
-  reducers,
-// Persistance.load(),
+  rootReducer,
+  Persistance("localstorage").load(),
   devToolsEnhancer({
     // Specify name here, actionsBlacklist, actionsCreators and other options if needed
   })

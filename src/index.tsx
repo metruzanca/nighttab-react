@@ -4,8 +4,6 @@ import { Provider } from 'react-redux'
 import store from 'store';
 
 import App from 'app';
-import { ConfigProvider } from 'contexts';
-import { Compose } from 'lib/utils';
 
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -18,11 +16,7 @@ import { Compose } from 'lib/utils';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={ store }>
-      <Compose components={[
-        ConfigProvider,
-      ]}>
-        <App />
-      </Compose>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

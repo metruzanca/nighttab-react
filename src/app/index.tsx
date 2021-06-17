@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
 import { Group, Header, Menu } from 'components';
-import { ConfigContext } from 'contexts';
 import { theme } from 'styles';
 
 import { Background, Layout, Link, LinkArea } from './styles';
 import { Modal } from 'components/Modal';
 import { ModalPosition } from 'components/Modal/styles';
 import { useSelector } from 'react-redux';
+import { RootState } from 'store/ducks';
+import { BookmarkGroup } from 'types';
 
 const DefaultStyles = createGlobalStyle`
   * {
@@ -41,7 +42,7 @@ const DefaultStyles = createGlobalStyle`
 function App() {
   // TODO create a defaultRootState type
   const editing = useSelector<any, boolean>(state => state.edit.editing)
-  const {config} = useContext(ConfigContext)
+  const bookmarks = useSelector<RootState, BookmarkGroup[]>(state => state.bookmarks)
   const [open, setOpen] = useState(false)
 
   return (
@@ -55,7 +56,7 @@ function App() {
         />
         <Link>
           <LinkArea>
-            {config && config.bookmarks.map(groupProps =>
+            {bookmarks.map(groupProps =>
               <Group key={uuid()} {...groupProps} editing={editing}/>
             )}
           </LinkArea>

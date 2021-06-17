@@ -2,7 +2,7 @@
   "redux duck": {
     "prefix": "duck",
     "body": [
-      "import { Action, Reducer } from \"types\"",
+      "import { Action, PayloadAction, Reducer } from \"types\"",
       "",
       "",
       "// Actions",
@@ -17,7 +17,8 @@
       "// Reducer",
       "const defaultState = {}",
       "",
-      "export const ${1:$TM_FILENAME_BASE}Reducer: Reducer<ActionTypes, typeof defaultState> = (",
+      "",
+      "export const ${1:$TM_FILENAME_BASE}Reducer: Reducer<typeof defaultState, ActionTypes> = (",
       "  state = defaultState, action",
       ") => {",
       "  switch (action.type) {",

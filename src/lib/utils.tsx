@@ -5,6 +5,9 @@ interface Props {
   children: React.ReactNode
 }
 
+/**
+ * Compose provider components together
+ */
 export const Compose: React.FC<Props> = ({components = [], children}) => (
   <>
     {

@@ -1,11 +1,11 @@
-import { Action, Reducer } from "types"
+import { Action, PayloadAction, Reducer } from "types"
 
 
 // Actions
 type scope = 'edit'
 
 type SET_EDITING =  `${scope}/SET_EDITING`
-type setEditing = Action<SET_EDITING, boolean>
+type setEditing = PayloadAction<SET_EDITING, boolean>
 type TOGGLE_EDITING =  `${scope}/TOGGLE_EDITING`
 type toggleEditing = Action<TOGGLE_EDITING>
 
@@ -21,7 +21,7 @@ const defaultState = {
 
 export type EditState = typeof defaultState
 
-export const editReducer: Reducer<ActionTypes, EditState> = (
+export const editReducer: Reducer<EditState, ActionTypes> = (
   state = defaultState, action
 ) => {
   switch (action.type) {
@@ -42,6 +42,6 @@ export const editActions = {
     return { type: "edit/SET_EDITING", payload: isEditing }
   },
   toggle (): toggleEditing {
-    return { type: "edit/TOGGLE_EDITING", payload: undefined }
+    return { type: "edit/TOGGLE_EDITING" }
   },
 }

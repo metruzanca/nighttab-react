@@ -1,21 +1,7 @@
-# NightTab React
+# NIGHTTAB React
+A neutral new tab page accented with a chosen colour. Customise the layout, style, background and bookmarks in nightTab -- a custom start page.
 
-Now, if all goes well. **COOL DEEP** is the first person to see this. Yes. I am alive. Heres a gift. (Also proof that I'm not all talk)
+[![nightTab Demo](docs/assets/banner-1400-560.png)](https://zombiefox.github.io/nightTab/)
 
-Idk how far this has gotten, I'm writing this readme the very first day I started working on this new repository. (looking at the clock its 3am on 15/02/2021)
-
----
-
-Hello future me!
-
-# Development
-
-```
-npm i
-```
-
-```
-npm start
-```
-
-While in development, theres a debug menu for toggling edit mode and for injecting a nighttab config
+# This version of NightTab is under construction
+The goal for this project is to bring the wonderful nighttab project to modern tooling to allow greater extensability. Theres lots planned. For now it needs to match [NightTab's feature set](https://github.com/zombieFox/nightTab).

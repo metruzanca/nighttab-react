@@ -8,11 +8,11 @@ interface Engine {
   [name:string]: {
     url: string
     name: string
-    queryName: string
+    queryName?: string
   }
 }
 
-type SearchEngineDictionary = Engine & Selected
+type SearchEngineDictionary = Engine | Selected
 
 export interface Header {
   area: {

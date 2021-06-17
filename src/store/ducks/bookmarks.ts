@@ -1,5 +1,4 @@
-import { Action, Reducer } from "types"
-
+import { Action, BookmarkGroup, PayloadAction, Reducer } from "types"
 
 // Actions
 type scope = 'bookmarks'
@@ -14,7 +13,7 @@ type DELETE_GROUP = `${scope}/DELETE_GROUP`
 type deleteGroup = Action<DELETE_GROUP>
 
 type CREATE_BOOKMARK = `${scope}/CREATE_BOOKMARK`
-type createBookmark = Action<CREATE_BOOKMARK>
+type createBookmark = PayloadAction<CREATE_BOOKMARK, {name: string}>
 type EDIT_BOOKMARK = `${scope}/EDIT_BOOKMARK`
 type editBookmark = Action<EDIT_BOOKMARK>
 type DELETE_BOOKMARK = `${scope}/DELETE_BOOKMARK`
@@ -34,9 +33,11 @@ type ActionTypes =
 
 
 // Reducer
-const defaultState = {}
+export type bookmarksState = BookmarkGroup[]
 
-export const bookmarksReducer: Reducer<ActionTypes, typeof defaultState> = (
+const defaultState: bookmarksState = []
+
+export const bookmarksReducer: Reducer<bookmarksState, ActionTypes> = (
   state = defaultState, action
 ) => {
   switch (action.type) {
@@ -49,9 +50,9 @@ export const bookmarksReducer: Reducer<ActionTypes, typeof defaultState> = (
 // Action Creators
 export const bookmarksActions = {
   init (): init {
-    return { type: "bookmarks/INIT", payload: undefined }
+    return { type: "bookmarks/INIT" }
   },
-  createBookmark (): Action<CREATE_BOOKMARK> {
-    return { type: "bookmarks/CREATE_BOOKMARK", payload: undefined }
+  createBookmark (): createBookmark {
+    return { type: "bookmarks/CREATE_BOOKMARK", payload: { name: 'test' } }
   },
 }
