@@ -1,15 +1,24 @@
-import { createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from "./ducks"
 import registerCommands from './commands'
-import { Persistance } from 'lib';
+import { Persistance, persistanceMiddleware } from 'lib';
+
+const composeEnhancers = composeWithDevTools({
+  // Specify name here, actionsBlacklist, actionsCreators and other options if needed
+})
+
+const persist = Persistance("localstorage")
 
 const store = createStore(
   rootReducer,
-  Persistance("localstorage").load(),
-  devToolsEnhancer({
-    // Specify name here, actionsBlacklist, actionsCreators and other options if needed
-  })
+  persist.load(),
+  composeEnhancers(
+    applyMiddleware(
+      persistanceMiddleware(persist)
+    ),
+    // other store enhancers if any
+  ),
 )
 
 export default store

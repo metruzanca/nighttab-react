@@ -1,3 +1,5 @@
+import { Middleware } from "redux"
+import { RootState } from "store/ducks"
 import { Instance } from "types"
 
 // TODO give this a better name
@@ -60,4 +62,17 @@ export function Persistance(type:PersistanceType): Persistance{
       },
     }
   }
+}
+
+export const persistanceMiddleware = (instance: Persistance) => {
+  
+  const middleware: Middleware<{}, RootState> = store => next => action => {
+    const nextState = next(action)
+    if(process.env.NODE_ENV !== 'development'){
+      instance.save(store.getState())
+    }
+    return nextState
+  }
+
+  return middleware
 }
