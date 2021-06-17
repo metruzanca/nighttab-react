@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import store from 'store';
 
 import App from 'app';
 import { EditingProvider, ConfigProvider } from 'contexts';
@@ -15,12 +17,14 @@ import { Compose } from 'lib/utils';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Compose components={[
-      ConfigProvider,
-      EditingProvider,
-    ]}>
-      <App />
-    </Compose>
+    <Provider store={ store }>
+      <Compose components={[
+        ConfigProvider,
+        EditingProvider,
+      ]}>
+        <App />
+      </Compose>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

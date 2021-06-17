@@ -1,0 +1,40 @@
+{
+  "redux duck": {
+    "prefix": "duck",
+    "body": [
+      "import { Action, Reducer } from \"types\"",
+      "",
+      "",
+      "// Actions",
+      "type scope = '${1:$TM_FILENAME_BASE}'",
+      "type INIT =  `\\${scope}/INIT`",
+      "type init = Action<INIT>",
+      "",
+      "type ActionTypes =",
+      "| init",
+      "",
+      "",
+      "// Reducer",
+      "const defaultState = {}",
+      "",
+      "export const ${1:$TM_FILENAME_BASE}Reducer: Reducer<ActionTypes, typeof defaultState> = (",
+      "  state = defaultState, action",
+      ") => {",
+      "  switch (action.type) {",
+      "    case \"${1:$TM_FILENAME_BASE}/INIT\":",
+      "    default: return state",
+      "  }",
+      "}",
+      "",
+      "",
+      "// Action Creators",
+      "export const ${1:$TM_FILENAME_BASE}Actions = {",
+      "  init (): init {",
+      "    return { type: \"${1:$TM_FILENAME_BASE}/INIT\", payload: undefined }",
+      "  },",
+      "}",
+      ""
+    ],
+    "description": "redux duck"
+  }
+}

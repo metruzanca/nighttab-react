@@ -18,6 +18,7 @@ import packagejson from "../../package.json";
   bookmarks: Array<BookmarkGroup>
 */
 
+// TODO remove prototpyes. This will get messy
 // Yay for prototypes
 export function Instance(this: InstanceType){
   this.nighttab = nighttab()
