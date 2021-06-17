@@ -1,14 +1,15 @@
-import React, { useContext, useCallback, useState } from 'react';
+import { useContext, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
-import { Debug, Group, Header, Menu } from 'components';
-import { ConfigContext, EditingContext } from 'contexts';
+import { Group, Header, Menu } from 'components';
+import { ConfigContext } from 'contexts';
 import { theme } from 'styles';
 
 import { Background, Layout, Link, LinkArea } from './styles';
 import { Modal } from 'components/Modal';
 import { ModalPosition } from 'components/Modal/styles';
+import { useSelector } from 'react-redux';
 
 const DefaultStyles = createGlobalStyle`
   * {
@@ -37,13 +38,11 @@ const DefaultStyles = createGlobalStyle`
   }
 `
 
-// TODO remove all the ? and config && once generating a new instance is setup
-
 function App() {
-  const {editing} = useContext(EditingContext)
+  // TODO create a defaultRootState type
+  const editing = useSelector<any, boolean>(state => state.edit.editing)
   const {config} = useContext(ConfigContext)
   const [open, setOpen] = useState(false)
-  console.log("Bookmarks", config?.bookmarks);
 
   return (
     <>
@@ -62,11 +61,6 @@ function App() {
           </LinkArea>
         </Link>
       </Layout>
-      {/*
-        @ZombieFox Original nighttab kept Menu off screen.
-        Conditionally rendering it will probably make NT load faster
-        Will probably require some extra transition setup, but thats okay.
-      */}
       {open && (
         <Modal closeMenu={() => setOpen(false)} position={ModalPosition.right}>
           <Menu/>

@@ -19,7 +19,9 @@ const defaultState = {
   editing: false
 }
 
-export const editReducer: Reducer<ActionTypes, typeof defaultState> = (
+export type EditState = typeof defaultState
+
+export const editReducer: Reducer<ActionTypes, EditState> = (
   state = defaultState, action
 ) => {
   switch (action.type) {

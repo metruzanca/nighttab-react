@@ -2,9 +2,10 @@ import { ColorPicker } from "components/ColorPicker"
 import { FileEvent, FileSelector } from "components/FileSelector"
 import { Modal } from "components/Modal"
 import { ModalPosition } from "components/Modal/styles"
-import { EditingContext } from "contexts"
 import { Persistance } from "lib"
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { actions } from "store/ducks"
 import styled from "styled-components"
 
 type Props = {}
@@ -65,8 +66,10 @@ function useModals(position: ModalPosition , children:any){
 }
 
 export const Debug: React.FC<Props> = ({}) => {
-  const {setEditing, editing} = useContext(EditingContext)
-  const handleToggleEdit =  () => setEditing(!editing)
+  //TODO get rootstate
+  const editing = useSelector<any, boolean>(state => state.edit.editing)
+  const dispatch = useDispatch()
+  const handleToggleEdit =  () => dispatch(actions.edit.setEditing(!editing))
   
   const {Modal: Modal2, setOpen: setOpen2} = useModals(ModalPosition.center, "Add bookmark/group")
   const {Modal: Modal3, setOpen: setOpen3} = useModals(ModalPosition.right, "Settings")

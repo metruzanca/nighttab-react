@@ -16,12 +16,12 @@ import {
   Edit,
   Delete,
 } from "./styles"
-import { withEditing, Editable } from "contexts";
 import { Icons } from "styles";
+import { EditState } from "store/ducks/edit";
 
-interface Props extends BookmarkGroup, Editable {}
+interface Props extends BookmarkGroup, EditState {}
 
-export const Group = withEditing<Props>(({
+export const Group: React.FC<Props> = ({
   items,
   name,
   openAll,
@@ -64,4 +64,4 @@ export const Group = withEditing<Props>(({
       </Body>
     </Wrapper>
   )
-})
+}

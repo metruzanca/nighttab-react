@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import store from 'store';
 
 import App from 'app';
-import { EditingProvider, ConfigProvider } from 'contexts';
+import { ConfigProvider } from 'contexts';
 import { Compose } from 'lib/utils';
 
 // import { library } from '@fortawesome/fontawesome-svg-core'
@@ -20,7 +20,6 @@ ReactDOM.render(
     <Provider store={ store }>
       <Compose components={[
         ConfigProvider,
-        EditingProvider,
       ]}>
         <App />
       </Compose>
