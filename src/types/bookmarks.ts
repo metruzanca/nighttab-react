@@ -35,7 +35,7 @@ export interface BookmarkItem {
   background: {
     show: boolean
     // source for "image" ? e.g. "image" | "icon" | "url"(?)
-    type: "image"
+    type: "image" | "video"
     opacity: number
     image: {
       url: string
@@ -60,7 +60,7 @@ export interface BookmarkItem {
     visual: {
       show: boolean
       // look at src for list
-      type: "icon"
+      type: "icon" | "letter" | "icon"
       letter: {
         size: number
         text: string
@@ -74,7 +74,7 @@ export interface BookmarkItem {
         // This name comes from fontawesome (e.g. dice-d20)
         name: string
         // I presume this for the various FA icon sets
-        prefix: "fas"
+        prefix: string
         label: string
       }
       shadow: {

@@ -64,6 +64,7 @@ export function Persistance(type:PersistanceType): Persistance{
   }
 }
 
+// TODO add a nighttab-backup
 export const persistanceMiddleware = (instance: Persistance) => {
   
   const middleware: Middleware<{}, RootState> = store => next => action => {
