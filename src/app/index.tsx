@@ -3,7 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
 import { Group, Header, Menu } from 'components';
-import { theme } from 'styles';
 
 import { Background, Layout, Link, LinkArea } from './styles';
 import { Modal } from 'components/Modal';
@@ -27,7 +26,7 @@ const DefaultStyles = createGlobalStyle`
   }
 
   :root {
-    font-size: ${theme.rootFontSize};
+    font-size: var(--theme-root-font-size);
   }
 
   *, ::after, ::before {

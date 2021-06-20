@@ -46,5 +46,12 @@ export const Delete = styled.button`
 `
 
 export const Body = styled.div`
+  background-color: transparent;
+  font-size: var(--link-item-size);
+  /* position: relative; */
   display: grid;
+  grid-auto-rows: var(--link-item-height);
+  grid-gap: calc(var(--layout-space) * var(--layout-gutter));
+  grid-template-columns: repeat(auto-fill, minmax(var(--link-item-width), 1fr));
+  grid-auto-flow: dense;
 `

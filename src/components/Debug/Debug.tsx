@@ -112,6 +112,9 @@ export const Debug: React.FC<Props> = ({}) => {
         <Button onClick={() => file && handleInjectConfig(file)}>
           Inject Uploaded Config
         </Button>
+        <Button onClick={() => localStorage.clear()}>
+          Delete Config
+        </Button>
       </div>
       {Modal1}
       {Modal2}

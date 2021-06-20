@@ -7,8 +7,7 @@ export const Wrapper = styled.div`
   & > a:visited {
     color: lightblue;
   }
-  /* Width and height wasn't defined here in the original, as it was using grid.
-  I placed this here for initial development. Should be removed later */
+  /*I placed this here for initial development. Should be removed later */
   width: ${theme.linkItemWidth};
   height: ${theme.linkItemHeight};
 
@@ -23,11 +22,20 @@ export const Front = styled.a`
 
 `
 
-export const Icon = styled.a`
+export const Display = styled.div`
 
 `
 
-export const DisplayName = styled.p`
+export const DisplayIcon = styled.a`
+
+`
+
+
+export const DisplayName = styled.p<{size: number}>`
+  font-size: calc(${p => p.size} * var(--theme-root-font-size));
+`
+
+export const Background = styled.div`
 
 `
 
@@ -39,11 +47,7 @@ export const Url = styled.div`
 
 `
 
-export type ControlProps = {
-  editing: boolean
-}
-
-export const Control = styled.div<ControlProps>`
+export const Control = styled.div<{editing: boolean}>`
   display: ${p => p.editing ? "flex" : "none"};
   flex-wrap: wrap;
 `
@@ -64,15 +68,16 @@ export const MoveRight = styled.button`
 
 `
 
-
 export const Edit = styled.button`
   height: 30px;
   width: 50%;
+  /*I placed this here for initial development. Should be removed later */
   border-bottom-left-radius: ${theme.borderRadius};
 `
 
 export const Delete = styled.button`
   height: 30px;
   width: 50%;
+  /*I placed this here for initial development. Should be removed later */
   border-bottom-right-radius: ${theme.borderRadius};
 `

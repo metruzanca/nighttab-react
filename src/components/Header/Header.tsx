@@ -28,6 +28,7 @@ export const Header: React.FC<Props> = ({
 }) => {
   const Debug = useDebug()
 
+  // These are here because these have handlers that need to be passed to them.
   headerElements.set("coloraccent", <ColorAccent/>)
   headerElements.set("editadd", <EditAdd/>)
   headerElements.set("menu", <Menu setOpen={setOpen}/>)

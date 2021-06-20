@@ -29,7 +29,7 @@ export const Group: React.FC<Props> = ({
 }) => {
 
   return (
-    <Wrapper>
+    <Wrapper> 
       <Header>
         {editing && (
           <Control>
@@ -50,9 +50,6 @@ export const Group: React.FC<Props> = ({
             </Delete>
           </Control>
         )}
-        {/* @zombiefox, this is a great example of where we can do things directly
-            via react instead of using name.show to set a display: none
-        */}
         {name.show && <Name>{name.text}</Name>}
       </Header>
       <Body>

@@ -1,40 +1,61 @@
 import React from "react"
 import { Icons } from "styles"
+import { BookmarkItem } from "types"
 import {
-  Back,
-  Control,
-  Delete,
-  DisplayName,
-  Drag,
-  Edit,
-  Front,
-  Icon,
-  MoveLeft,
-  MoveRight,
-  Url,
   Wrapper,
+  Front,
+  Display,
+  DisplayName,
+  DisplayIcon,
+  Background,
+  Back,
+  Url,
+  Control,
+  MoveLeft,
+  Drag,
+  MoveRight,
+  Edit,
+  Delete,
 } from "./styles"
 
-type Props = {
+interface Props extends BookmarkItem {
   editing: boolean
 }
 
 export const LinkItem: React.FC<Props> = ({
   editing = false,
+  display: {
+    name: {
+      show: showDisplayName,
+      text: textDisplayName,
+      size: sizeDisplayName,
+    }
+  }
 }) => {
 
   return (
     <Wrapper>
+
       <Front href="">
-        <div>
-          <Icon></Icon>
-          <DisplayName></DisplayName>
-        </div>
+        <Display>
+          <DisplayIcon></DisplayIcon>
+          { showDisplayName && (
+            <DisplayName size={sizeDisplayName}>
+              {textDisplayName}
+            </DisplayName>
+          )}
+        </Display>
+
+        { false && (
+          <Background/>
+        )}
       </Front>
+
       <Back>
         <Url>
           <p></p>
         </Url>
+
         <Control editing={editing}>
           <MoveLeft>
             {Icons.LeftArrow}
@@ -52,6 +73,7 @@ export const LinkItem: React.FC<Props> = ({
             {Icons.Delete}
           </Delete>
         </Control>
+
       </Back>
     </Wrapper>
   )

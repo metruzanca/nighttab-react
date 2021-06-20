@@ -5,6 +5,8 @@ import store from 'store';
 
 import App from 'app';
 
+import 'styles/variables.css'
+
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 // import { faPen } from '@fortawesome/free-solid-svg-icons'
