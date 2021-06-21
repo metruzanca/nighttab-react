@@ -48,7 +48,7 @@ export interface BookmarkItem {
     // I assume this is vertical and horizontal
     direction: "vertical" | "horizontal"
     // look at src for list
-    order: "visualname"
+    order: "visualname" | "namevisual"
     // look at src for list
     alignment: "centercenter"
     gutter: number
@@ -59,16 +59,10 @@ export interface BookmarkItem {
     },
     visual: {
       show: boolean
-      // look at src for list
-      type: "icon" | "letter" | "icon"
-      letter: {
+      shadow: {
         size: number
-        text: string
       }
-      image: {
-        size: number
-        url: string
-      }
+      type: 'icon' | 'letter' | 'image'
       icon: {
         size: number
         // This name comes from fontawesome (e.g. dice-d20)
@@ -77,8 +71,13 @@ export interface BookmarkItem {
         prefix: string
         label: string
       }
-      shadow: {
+      letter: {
         size: number
+        text: string
+      }
+      image: {
+        size: number
+        url: string
       }
     }
     name: {
@@ -86,5 +85,46 @@ export interface BookmarkItem {
       text: string
       size: number
     }
+  }
+}
+
+// Duplicate types. Can't use discriminating union here on these 3 types
+// We want to store values if we change type, so user can change back
+
+// This type is handy for intellisense in LinkItem
+export type VisualElement = VisualIcon | VisualLetter | VisualImage
+
+interface Visual {
+  show: boolean
+  shadow: {
+    size: number
+  }
+}
+
+export interface VisualIcon extends Visual {
+  type: 'icon'
+  icon: {
+    size: number
+    // This name comes from fontawesome (e.g. dice-d20)
+    name: string
+    // I presume this for the various FA icon sets
+    prefix: string
+    label: string
+  }
+}
+
+export interface VisualLetter extends Visual {
+  type: 'letter'
+  letter: {
+    size: number
+    text: string
+  }
+}
+
+export interface VisualImage extends Visual {
+  type: 'image'
+  image: {
+    size: number
+    url: string
   }
 }

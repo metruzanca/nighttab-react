@@ -26,10 +26,18 @@ export const Display = styled.div`
 
 `
 
-export const DisplayIcon = styled.a`
+export const DisplayLetter = styled.p<{size: number}>`
 
 `
 
+// Might need to implement the icons differently. This is just a placeholder
+export const DisplayIcon = styled.div`
+
+`
+
+export const DisplayImage = styled.div<{url: string, size: number}>`
+
+`
 
 export const DisplayName = styled.p<{size: number}>`
   font-size: calc(${p => p.size} * var(--theme-root-font-size));
@@ -44,6 +52,10 @@ export const Back = styled.div`
 `
 
 export const Url = styled.div`
+
+`
+
+export const UrlText = styled.p`
 
 `
 

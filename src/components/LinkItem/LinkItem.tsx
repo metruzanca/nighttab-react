@@ -1,15 +1,18 @@
 import React from "react"
 import { Icons } from "styles"
-import { BookmarkItem } from "types"
+import { BookmarkItem, VisualElement } from "types"
 import {
   Wrapper,
   Front,
   Display,
   DisplayName,
+  DisplayLetter,
   DisplayIcon,
+  DisplayImage,
   Background,
   Back,
   Url,
+  UrlText,
   Control,
   MoveLeft,
   Drag,
@@ -17,6 +20,32 @@ import {
   Edit,
   Delete,
 } from "./styles"
+
+
+const DisplayElement: React.FC<VisualElement> = ({
+  shadow,
+  ...props
+}) => {
+  switch (props.type) {
+    case 'letter': return (
+      <DisplayLetter size={props.letter.size}>
+        {props.letter.text}
+      </DisplayLetter>
+    )
+    case 'icon': return (
+      <DisplayIcon>
+        {/* TODO font awesome */}
+        {/* Size might have to a wrapper here, otherwise things might get messy */}
+      </DisplayIcon>
+    )
+    case 'image': return (
+      <DisplayImage
+        size={props.image.size}
+        url={props.image.url}
+      />
+    )
+  }
+}
 
 interface Props extends BookmarkItem {
   editing: boolean
@@ -29,20 +58,37 @@ export const LinkItem: React.FC<Props> = ({
       show: showDisplayName,
       text: textDisplayName,
       size: sizeDisplayName,
-    }
+    },
+    visual,
+    order
   }
 }) => {
+
+  const displayElement = visual.show ? (
+    <DisplayElement {...visual}/>
+  ) : null
+
+  const displayName = showDisplayName ? (
+    <DisplayName size={sizeDisplayName}>
+      {textDisplayName}
+    </DisplayName>
+  ) : null
 
   return (
     <Wrapper>
 
       <Front href="">
         <Display>
-          <DisplayIcon></DisplayIcon>
-          { showDisplayName && (
-            <DisplayName size={sizeDisplayName}>
-              {textDisplayName}
-            </DisplayName>
+          {order === 'visualname' ? (
+            <>
+              {displayElement}
+              {displayName}
+            </>
+          ): (
+            <>
+              {displayName}
+              {displayElement}
+            </>
           )}
         </Display>
 
@@ -53,7 +99,7 @@ export const LinkItem: React.FC<Props> = ({
 
       <Back>
         <Url>
-          <p></p>
+          <UrlText></UrlText>
         </Url>
 
         <Control editing={editing}>
