@@ -2,19 +2,19 @@ import { Action, PayloadAction, Reducer } from "types"
 
 
 // Actions
-export const miscScope = 'settings/misc'
-type INIT =  `${typeof miscScope}/INIT`
-type init = Action<INIT>
+type miscScope = 'settings/misc'
+type UPDATE_MISC_SETTINGS =  `${miscScope}/UPDATE_MISC_SETTINGS`
+type updateMiscSettings = Action<UPDATE_MISC_SETTINGS>
 
-type ActionTypes =
-| init
+export type MiscTypes =
+| updateMiscSettings
 
 
 // Reducer
 const defaultState = {}
 
-
-export const miscReducer: Reducer<typeof defaultState, ActionTypes> = (
+/**This reducer handles some settings which are not scoped correctly */
+export const miscReducer: Reducer<typeof defaultState, MiscTypes> = (
   state = defaultState, action
 ) => {
   switch (action.type) {

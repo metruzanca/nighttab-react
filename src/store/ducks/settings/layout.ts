@@ -6,15 +6,16 @@ import {
 
 
 // Actions
-export const layoutScope = 'settings/layout'
-type layoutScope = typeof layoutScope
+type scope = 'settings/layout'
 
-type UPDATE_LAYOUT =  `${layoutScope}/UPDATE_LAYOUT`
+type UPDATE_LAYOUT =  `${scope}/UPDATE_LAYOUT`
 type updateLayout = PayloadAction<UPDATE_LAYOUT, Partial<Layout>>
+
+export type LayoutTypes = updateLayout
 
 
 // Reducer
-const defaultState: Layout = {
+export const defaultLayout: Layout = {
   alignment: "centercenter",
   order: "headerlink",
   direction: "vertical",
@@ -27,16 +28,16 @@ const defaultState: Layout = {
   title: "",
 }
 
-export const layoutReducer: Reducer<typeof defaultState, updateLayout> = (
-  state = defaultState, action
+export const layoutReducer: Reducer<Layout, updateLayout> = (
+  state = defaultLayout, action
 ) => {
-  if(action.type === "settings/layout/UPDATE_LAYOUT") {
-    return {
+  switch (action.type) {
+    case "settings/layout/UPDATE_LAYOUT": return {
       ...state,
       ...action.payload,
     }
+    default: return state
   }
-  return state
 }
 
 

@@ -23,7 +23,7 @@ export interface Settings {
 }
 
 
-interface Link {
+export interface Link {
   area: {
     width: number
     //idk
