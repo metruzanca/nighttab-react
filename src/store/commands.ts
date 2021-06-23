@@ -1,6 +1,6 @@
 import { actions } from "./ducks"
 import { Dispatch } from "redux"
-import { BookmarkGroup, LayoutAlignment, LayoutDirection, LayoutOrder, LayoutScrollbars } from "types"
+import { BookmarkGroup, Layout, LayoutAlignment, LayoutDirection, LayoutOrder, LayoutScrollbars } from "types"
 
 declare global {
   interface Window {
@@ -38,35 +38,8 @@ export default function registerCommands(dispatch: Dispatch) {
       dispatch(actions.bookmarks.createBookmark())
     },
     // Settings/Layout
-    setScaleSize(size: number) {
-      dispatch(actions.settings.setScaleSize(size))
-    },
-    setAreaWidth(width: number) {
-      dispatch(actions.settings.setAreaWidth(width))
-    },
-    setAlignment(alignment: LayoutAlignment) {
-      dispatch(actions.settings.setAlignment(alignment))
-    },
-    setStackAlignment(direction: LayoutDirection) {
-      dispatch(actions.settings.setStackAlignment(direction))
-    },
-    setStackOrder(order: LayoutOrder) {
-      dispatch(actions.settings.setStackOrder(order))
-    },
-    setPadding(padding: number) {
-      dispatch(actions.settings.setPadding(padding))
-    },
-    setGutter(gutter: number) {
-      dispatch(actions.settings.setGutter(gutter))
-    },
-    setPageTitle(title: string) {
-      dispatch(actions.settings.setPageTitle(title))
-    },
-    setPageScrollPast(scrollPast: boolean) {
-      dispatch(actions.settings.setPageScrollPast(scrollPast))
-    },
-    setScrollbarStyle(style: LayoutScrollbars) {
-      dispatch(actions.settings.setScrollbarStyle(style))
+    updateLayout(payload: Partial<Layout>) {
+      dispatch(actions.settings.updateLayout(payload))
     },
   }
 }
