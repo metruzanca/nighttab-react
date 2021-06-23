@@ -1,4 +1,4 @@
-import { combineReducers, ReducersMapObject } from 'redux'
+import { combineReducers } from 'redux'
 import { bookmarksReducer, bookmarksActions, bookmarksState } from './bookmarks'
 import { editReducer, editActions, EditState } from './edit'
 import { settingsReducer, settingsActions, settingsState } from "./settings";
@@ -8,12 +8,6 @@ export interface RootState {
   edit: EditState
   state: settingsState
 }
-
-// type reducersMap = ReducersMapObject<{
-//   bookmarks: bookmarksState,
-//   edit: EditState,
-//   state: settingsState,
-// }>
 
 
 export const rootReducer = combineReducers({

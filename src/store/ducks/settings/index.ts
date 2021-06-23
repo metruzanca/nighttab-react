@@ -1,5 +1,7 @@
+import { AnyAction } from "redux"
 import { Action, Reducer, Settings } from "types"
-
+import {layoutScope, layoutReducer, layoutActions} from './layout'
+import {miscScope, miscReducer, miscActions} from './misc'
 
 // Actions
 type scope = 'settings'
@@ -529,11 +531,26 @@ const defaultState: Settings = {
   "autoSuggest": false
 }
 
+const scopedReducer = (
+  state: any, action: AnyAction
+) => (
+  scope: string, reducer: Reducer<any, any>
+  ) => {
+    if(action.type.startsWith(scope)){
+      //@ts-ignore action should be is type guarded here
+      return reducer(state.layout, action)
+    }
+}
+
 export const settingsReducer: Reducer<settingsState, ActionTypes> = (
   state = defaultState, action
 ) => {
-  switch (action.type) {
-    default: return state
+  const nestedReduce = scopedReducer(state, action)
+
+  return {
+    ...state,
+    ...nestedReduce(miscScope, miscReducer),
+    layout: nestedReduce(layoutScope, layoutReducer),
   }
 }
 
@@ -543,4 +560,6 @@ export const settingsActions = {
   init (): init {
     return { type: "settings/INIT" }
   },
+  ...layoutActions,
+  ...miscActions,
 }

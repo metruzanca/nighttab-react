@@ -1,6 +1,8 @@
 import { HSL, RGB } from "./color";
 import { Header } from "./header";
+import { Layout } from "./settings/layout";
 
+/**Settings maps to "state" in nighttab's JSON currently */
 export interface Settings {
   // edit: boolean
   shade: boolean
@@ -19,7 +21,6 @@ export interface Settings {
   theme: Theme
   background: Background
 }
-
 
 
 interface Link {
@@ -97,7 +98,7 @@ interface Link {
   breakpoint: string
 }
 
-interface Group {
+export interface Group {
   area: {
     // src
     justify: "left"
@@ -118,24 +119,7 @@ interface Group {
   edit: boolean
 }
 
-interface Layout {
-  // idk
-  alignment: "centercenter"
-  // idk
-  order: "headerlink"
-  // idk
-  direction: "vertical"
-  padding: number
-  gutter: number
-  size: number
-  width: number
-  scrollPastEnd: boolean
-  // idk
-  scrollbars: "auto"
-  title: string
-}
-
-interface Theme {
+export interface Theme {
   accent: {
     hsl: HSL
     rgb: RGB
@@ -188,8 +172,7 @@ interface Theme {
     display: Font
     ui: Font
   }
-  // idk but im guessing "dark" | "light"
-  style: "dark"
+  style: ColorScheme
   radius: number
   shadow: number
   shade: {
@@ -203,6 +186,8 @@ interface Theme {
   }
 }
 
+export type ColorScheme = "dark" | "light" | "system"
+
 interface Font {
   name: string
   weight: number
@@ -210,7 +195,7 @@ interface Font {
   style: "normal"
 }
 
-interface Background {
+export interface Background {
   color: {
     by: "theme"
     hsl: HSL

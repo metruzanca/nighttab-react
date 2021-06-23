@@ -1,114 +1,69 @@
 import React, { useState } from "react"
-import { Wrapper } from "./styles"
-import { MenuNav, Items } from "components/MenuNav"
+import { v4 as uuid } from 'uuid';
 
-type Props = {
-}
+import sections from './sections'
+import {
+  Wrapper,
+  Item,
+  Button,
+  Subnav,
+  MenuNav,
+  MenuClose,
+  MenuContent,
+} from "./styles"
 
-const MENU_NAVIGATION: Array<Items> = [
-  {
-    title: "Layout",
-    sections: [
-      {
-        name: "Scaling",
-        href: "idk yet",
-      },
-      {
-        name: "Area",
-        href: "idk yet",
-      },
-      {
-        name: "Alignment",
-        href: "idk yet",
-      },
-      {
-        name: "Padding",
-        href: "idk yet",
-      },
-      {
-        name: "Gutter",
-        href: "idk yet",
-      },
-      {
-        name: "Page",
-        href: "idk yet",
-      },
-    ],
-  },
-  {
-    title: "Header",
-    sections: [
-      {
-        name: "Area",
-        href: "idk yet",
-      },
-      {
-        name: "Alignment",
-        href: "idk yet",
-      },
-      {
-        name: "Order",
-        href: "idk yet",
-      },
-      {
-        name: "Greeting",
-        href: "idk yet",
-      },
-      {
-        name: "Transitional words",
-        href: "idk yet",
-      },
-      {
-        name: "Clock",
-        href: "idk yet",
-      },
-      {
-        name: "Data",
-        href: "idk yet",
-      },
-      {
-        name: "Search",
-        href: "idk yet",
-      },
-      {
-        name: "Edit/Add",
-        href: "idk yet",
-      },
-      {
-        name: "Colour/Accent", // its color*... sigh... brits
-        href: "idk yet",
-      },
-      {
-        name: "Settings menu",
-        href: "idk yet",
-      },
-      {
-        name: "Border",
-        href: "idk yet",
-      },
-      {
-        name: "Position when scrolling",
-        href: "idk yet",
-      },
-      {
-        name: "Background colour",
-        href: "idk yet",
-      },
-    ],
-  },
-]
-
-export const Menu: React.FC<Props> = ({
+export const Menu: React.FC = ({
 }) => {
   const [subMenu, setSubMenu] = useState(0)
-
   return (
     <Wrapper>
-      <MenuNav
-        items={MENU_NAVIGATION}
-        onChange={index => setSubMenu(index)}
-        subMenu={subMenu}
-      />
+      <MenuNav>
+        {sections.map((item, index) => (
+          <MenuNavItem
+            key={uuid()}
+            subSections={item.subSections}
+            onClick={() => setSubMenu(index)}
+            active={index === subMenu}
+            name={item.name}
+          />
+        ))}
+      </MenuNav>
+      <MenuClose>
+
+      </MenuClose>
+      <MenuContent>
+        {sections[subMenu].component({})}
+      </MenuContent>
     </Wrapper>
   )
 }
+
+
+export interface Items {
+  name: string
+  subSections: Array<{
+    name: string
+    hash: string
+  }>
+}
+
+interface AccordionItemProps extends Items{
+  active: boolean
+  onClick: () => void
+}
+
+export const MenuNavItem: React.FC<AccordionItemProps> = ({
+  active, subSections, onClick, name: title
+}) => (
+  <Item>
+    <Button onClick={onClick}>
+      {title}
+    </Button>
+    <Subnav>
+      {active && subSections.map(s => (
+        // probably use jump.js instead here.
+        <a key={uuid()} href={s.hash}>{s.name}</a>
+      ))}
+    </Subnav>
+  </Item>
+)
