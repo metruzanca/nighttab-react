@@ -20,7 +20,7 @@ const subSections = [
   },
   {
     name: "Transitional words",
-    hash: "Transitional words",
+    hash: "Transitional-words",
   },
   {
     name: "Clock",
@@ -36,15 +36,15 @@ const subSections = [
   },
   {
     name: "Edit/Add",
-    hash: "Edit/Add",
+    hash: "Edit-Add",
   },
   {
     name: "Colour/Accent",
-    hash: "Colour/Accent",
+    hash: "Colour-Accent",
   },
   {
     name: "Settings menu",
-    hash: "Settings menu",
+    hash: "Settings-menu",
   },
   {
     name: "Border",
@@ -52,11 +52,11 @@ const subSections = [
   },
   {
     name: "Position when scrolling",
-    hash: "Position when scrolling",
+    hash: "Position-when-scrolling",
   },
   {
     name: "Background colour",
-    hash: "Background colour",
+    hash: "Background-colour",
   },
 ]
 
