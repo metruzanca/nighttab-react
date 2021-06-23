@@ -194,7 +194,10 @@ export const headerReducer: Reducer<Header, updateHeader> = (
   state = defaultHeader, action
 ) => {
   switch (action.type) {
-    case "settings/header/UPDATE_HEADER":
+    case "settings/header/UPDATE_HEADER": return {
+      ...state,
+      ...action.payload,
+    }
     default: return state
   }
 }

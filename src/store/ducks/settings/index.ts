@@ -61,7 +61,7 @@ export const settingsReducer: Reducer<settingsState, ActionTypes> = (
 
   return {
     ...state,
-    ...miscReducer(state.layout, action as MiscTypes),
+    // ...miscReducer(state, action as MiscTypes),
     layout: layoutReducer(state.layout, action as LayoutTypes),
     header: headerReducer(state.header, action as HeaderTypes),
     link: linkReducer(state.link, action as LinkTypes),
