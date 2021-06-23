@@ -1,5 +1,7 @@
 import { Slider } from "components/Form"
-import { MenuSection } from "types"
+import { useDispatch, useSelector } from "react-redux"
+import { actions, RootState } from "store/ducks"
+import { Layout as LayoutType, MenuSection } from "types"
 import {Section} from './Section'
 
 const subSections = [
@@ -11,22 +13,48 @@ const subSections = [
   {name: 'Page', hash: 'Page'},
 ]
 
-const Layout: MenuSection = {
-  name: 'Layout',
-  subSections,
-  component: ({}) => (
+
+export const Component: React.FC = () => {
+  const layout = useSelector<RootState, LayoutType>(state => state.state.layout)
+  const dispatch = useDispatch()
+  return (
     <>
       <Section {...subSections[0]}>
         <Slider
-          max={200}
           min={50}
+          max={200}
           defaultValue={100}
+          onChange={
+            size => dispatch(actions.settings.updateLayout({size: size / 100}))
+          }
+          value={layout.size * 100}
         >
           Size
         </Slider>
+        <br />
+        Resize all elements on the page.
+        <br />
+        Take care as some elements could scale up to outside the page.
+      </Section>
+      <Section {...subSections[1]}>
+      <Slider
+          min={10}
+          max={100}
+          defaultValue={80}
+          onChange={width => dispatch(actions.settings.updateLayout({width}))}
+          value={layout.width}
+        >
+          Width
+        </Slider>
       </Section>
     </>
-  ),
+  )
+}
+
+const Layout: MenuSection = {
+  name: 'Layout',
+  subSections,
+  component: Component,
 }
 
 export default Layout

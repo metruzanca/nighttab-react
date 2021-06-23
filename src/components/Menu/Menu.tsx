@@ -15,6 +15,7 @@ import {
 export const Menu: React.FC = ({
 }) => {
   const [subMenu, setSubMenu] = useState(0)
+  const Component = sections[subMenu].component
   return (
     <Wrapper>
       <MenuNav>
@@ -29,10 +30,10 @@ export const Menu: React.FC = ({
         ))}
       </MenuNav>
       <MenuClose>
-
+        ✕
       </MenuClose>
       <MenuContent>
-        {sections[subMenu].component({})}
+        <Component />
       </MenuContent>
     </Wrapper>
   )
@@ -62,7 +63,7 @@ export const MenuNavItem: React.FC<AccordionItemProps> = ({
     <Subnav>
       {active && subSections.map(s => (
         // probably use jump.js instead here.
-        <a key={uuid()} href={s.hash}>{s.name}</a>
+        <a key={uuid()} href={`#${s.hash}`}>{s.name}</a>
       ))}
     </Subnav>
   </Item>

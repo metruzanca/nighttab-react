@@ -60,16 +60,21 @@ const subSections = [
   },
 ]
 
-const Header: MenuSection = {
-  name: 'Header',
-  subSections,
-  component: ({}) => (
+export const Component: React.FC = () => {
+
+  return (
     <>
       <Section {...subSections[0]}>
         next section content
       </Section>
     </>
-  ),
+  )
+}
+
+const Header: MenuSection = {
+  name: 'Header',
+  subSections,
+  component: Component,
 }
 
 export default Header

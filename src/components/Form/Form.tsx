@@ -1,19 +1,10 @@
 import React from "react"
-import styled from "styled-components"
 
-type Props = {
-  max: number
-  min: number
-  defaultValue: number
-}
+type Props = {}
 
-export const StyledSlider = styled.input`
-
-`
-
-export const Slider: React.FC<Props> = ({}) => {
+export const Form: React.FC<Props> = ({}) => {
 
   return (
-    <StyledSlider />
+    <div>Form</div>
   )
 }
