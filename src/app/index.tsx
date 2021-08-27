@@ -9,7 +9,7 @@ import { Modal } from 'components/Modal';
 import { ModalPosition } from 'components/Modal/styles';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/ducks';
-import { BookmarkGroup } from 'types';
+import { BookmarkGroup, Header as HeaderType } from 'types';
 
 const DefaultStyles = createGlobalStyle`
   * {
@@ -39,8 +39,7 @@ const DefaultStyles = createGlobalStyle`
 `
 
 function App() {
-  // TODO create a defaultRootState type
-  const editing = useSelector<any, boolean>(state => state.edit.editing)
+  const editing = useSelector<RootState, boolean>(state => state.edit.editing)
   const bookmarks = useSelector<RootState, BookmarkGroup[]>(state => state.bookmarks)
   const [open, setOpen] = useState(false)
 
@@ -50,7 +49,6 @@ function App() {
       <Background/>
       <Layout>
         <Header
-          // config={config.state.header}
           setOpen={() => setOpen(true)}
         />
         <Link>
@@ -63,7 +61,7 @@ function App() {
       </Layout>
       {open && (
         <Modal closeMenu={() => setOpen(false)} position={ModalPosition.right}>
-          <Menu/>
+          <Menu onClose={() => setOpen(false)}/>
         </Modal>
       )}
     </>

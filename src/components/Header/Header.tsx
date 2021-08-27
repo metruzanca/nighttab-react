@@ -6,26 +6,16 @@ import { ColorAccent, EditAdd, headerElements, Menu, MenuProps } from "./compone
 import { Modal } from "components/Modal"
 import { Debug } from "components/Debug"
 import { ModalPosition } from "components/Modal/styles"
+import { useSelector } from "react-redux"
+import { RootState } from "store/ducks"
 
 interface Props extends MenuProps {
-  // config: HeaderType
 }
 
-const TEMP_CONFIG = [
-  "greeting",
-  "transitional",
-  "clock",
-  "date",
-  "search",
-  "editAdd",
-  "colorAccent",
-  "menu"
-]
-
 export const Header: React.FC<Props> = ({
-  // config: { order },
   setOpen,
 }) => {
+  const header = useSelector<RootState, HeaderType>(state => state.state.header)
   const Debug = useDebug()
 
   // These are here because these have handlers that need to be passed to them.
@@ -33,7 +23,7 @@ export const Header: React.FC<Props> = ({
   headerElements.set("editadd", <EditAdd/>)
   headerElements.set("menu", <Menu setOpen={setOpen}/>)
 
-  const elements = reorder(TEMP_CONFIG, headerElements)
+  const elements = reorder(header.order, headerElements)
 
   return (
     <Wrapper>

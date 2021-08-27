@@ -12,7 +12,12 @@ import {
   MenuContent,
 } from "./styles"
 
-export const Menu: React.FC = ({
+interface Props {
+  onClose: () => void
+}
+
+export const Menu: React.FC<Props> = ({
+  onClose
 }) => {
   const [subMenu, setSubMenu] = useState(0)
   const Component = sections[subMenu].component
@@ -29,7 +34,7 @@ export const Menu: React.FC = ({
           />
         ))}
       </MenuNav>
-      <MenuClose>
+      <MenuClose onClick={onClose}>
         ✕
       </MenuClose>
       <MenuContent>
